@@ -1,0 +1,117 @@
+.display_text_1 {
+    width: 320px;
+    line-height: 38px;
+    text-align: center;
+    margin-top: 35px;
+    max-width: 500px;
+    text-shadow: 1px 1px 1px #333;
+    position: relative;
+    border: none;
+    outline-color: rgba(255, 255, 255, 0);
+}
+
+.display_text_2 {
+    width: 320px;
+    line-height: 38px;
+    text-align: center;
+    margin-top: 20px;
+
+    max-width: 500px;
+    text-shadow: 1px 1px 1px #333;
+    position: relative;
+    border: none;
+    outline-color: rgba(255, 255, 255, 0);
+}
+
+.button {
+    height: 50px;
+    width: 70px;
+    line-height: 38px;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 1px 1px 1px #333;
+    border-radius: 5px;
+    margin: 0 10px 10px 0;
+    position: relative;
+    overflow: hidden;
+}
+
+.button.gray {
+    outline：none;
+    outline-color: rgba(255, 255, 255, 0);
+    color: #8c96a0;
+    text-shadow: 1px 1px 1px #fff;
+    border: 1px solid #dce1e6;
+    box-shadow: 0 1px 2px #fff inset, 0 -1px 0 #a8abae inset;
+    background: -webkit-linear-gradient(top, #f2f3f7, #e4e8ec);
+    background: -moz-linear-gradient(top, #f2f3f7, #e4e8ec);
+    background: linear-gradient(top, #f2f3f7, #e4e8ec);
+}
+
+.button.gray.big {
+
+    height: 105px;
+    outline：none;
+    outline-color: rgba(255, 255, 255, 0);
+    color: #8c96a0;
+    text-shadow: 1px 1px 1px #fff;
+    border: 1px solid #dce1e6;
+    box-shadow: 0 1px 2px #fff inset, 0 -1px 0 #a8abae inset;
+    background: -webkit-linear-gradient(top, #f2f3f7, #e4e8ec);
+    background: -moz-linear-gradient(top, #f2f3f7, #e4e8ec);
+    background: linear-gradient(top, #f2f3f7, #e4e8ec);
+}
+
+.gray:hover, .gray.big:hover {
+    background: -webkit-linear-gradient(top, #fefefe, #ebeced);
+    background: -moz-linear-gradient(top, #f2f3f7, #ebeced);
+    background: linear-gradient(top, #f2f3f7, #ebeced);
+}
+
+.gray:active, .gray.big:active {
+    top: 1px;
+    box-shadow: 0 1px 3px #a8abae inset, 0 3px 0 #fff;
+    background: -webkit-linear-gradient(top, #e4e8ec, #e4e8ec);
+    background: -moz-linear-gradient(top, #e4e8ec, #e4e8ec);
+    background: linear-gradient(top, #e4e8ec, #e4e8ec);
+}
+
+.demo_con {
+    width: 360px;
+    margin: 40px auto 0;
+    float: left;
+}
+
+.button_block {
+    float: left;
+    width: 10px;
+    height: 25px;
+    margin-top: 30px;
+    margin-right: 20px;
+}
+
+.big_button {
+    float: left;
+    width: 73px;
+    height: 25px;
+    margin-top: 20px;
+
+}
+
+.small_button {
+    float: left;
+    width: 34px;
+    height: 25px;
+    margin-right: 20px;
+    margin-top: 20px;
+
+}
+
+.footer {
+
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+
+}

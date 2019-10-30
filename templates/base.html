@@ -1,0 +1,406 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>网页计算器</title>
+    <link rel="stylesheet" href=" {% static 'css/bootstrap.min.css' %}"/>
+    <link rel="stylesheet" href=" {% static 'css/style.css' %}"/>
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-1 col-sm-4"></div>
+        <div id="computer" class="col-xs-10 col-sm-6">
+
+
+            <div>
+                <input class="display_text_1" type="text" placeholder="计算公式" id="formula" disabled/></br></br>
+                <input class="display_text_2" type="text" placeholder="计算结果" id="result" disabled/>
+            </div>
+
+            <div class="demo_con">
+
+                <div class="small_button">
+                    <button type="button" class="button gray" id="mc" onclick="getVal_mclear()">mc</button>
+                </div>
+
+                <div class="button_block"></div>
+                <div class="small_button">
+                    <button type="button" class="button gray" id="mp" onclick="getVal_mplus()">m+</button>
+                </div>
+
+                <div class="button_block"></div>
+                <div class="small_button">
+                    <button type="button" class="button gray" id="mm" onclick="getVal_mminus()">m-</button>
+                </div>
+
+                <div class="button_block"></div>
+                <div class="small_button">
+                    <button type="button" class="button gray" id="mr" onclick="getVal_mrecall()">mr</button>
+                </div>
+
+                <div class="button_block"></div>
+                <div class="small_button">
+                    <button type="button" class="button gray" onclick="getVal_clear()">C</button>
+                </div>
+
+                <div class="button_block"></div>
+                <div class="small_button">
+                    <button type="button" class="button gray" onclick="getVal_divide()">÷</button>
+                </div>
+
+                <div class="button_block"></div>
+                <div class="small_button">
+                    <button type="button" class="button gray" onclick="getVal_multiply()">×</button>
+                </div>
+
+
+                <div class="button_block"></div>
+                <div class="small_button">
+                    <button type="button" class="button gray" onclick="getVal_delete()">⇦</button>
+                </div>
+
+                <div class="button_block"></div>
+                <div class="small_button">
+                    <button type="button" class="button gray" onclick="getVal_7()">7</button>
+                </div>
+
+                <div class="button_block"></div>
+                <div class="small_button">
+                    <button type="button" class="button gray" onclick="getVal_8()">8</button>
+                </div>
+
+                <div class="button_block"></div>
+                <div class="small_button">
+                    <button type="button" class="button gray" onclick="getVal_9()">9</button>
+                </div>
+
+                <div class="button_block"></div>
+                <div class="small_button">
+                    <button type="button" class="button gray" onclick="getVal_minus()">-</button>
+                </div>
+
+                <div class="button_block"></div>
+                <div class="small_button">
+                    <button type="button" class="button gray" onclick="getVal_4()">4</button>
+                </div>
+
+                <div class="button_block"></div>
+                <div class="small_button">
+                    <button type="button" class="button gray" onclick="getVal_5()">5</button>
+                </div>
+
+                <div class="button_block"></div>
+                <div class="small_button">
+                    <button type="button" class="button gray" onclick="getVal_6()">6</button>
+                </div>
+
+                <div class="button_block"></div>
+                <div class="small_button">
+                    <button type="button" class="button gray" onclick="getVal_plus()">+</button>
+                </div>
+
+                <div class="button_block"></div>
+                <div class="small_button">
+                    <button type="button" class="button gray" onclick="getVal_1()">1
+                    </button>
+                </div>
+
+                <div class="button_block"></div>
+                <div class="small_button">
+                    <button type="button" class="button gray" onclick="getVal_2()">2
+                    </button>
+                </div>
+                <div class="button_block"></div>
+                <div class="small_button">
+                    <button type="button" class="button gray" onclick="getVal_3()">3
+                    </button>
+                </div>
+                <div class="button_block"></div>
+                <div class="big_button">
+                    <button type="button" class="button gray big" id="formula_compute">=</button>
+                </div>
+                <div class="button_block"></div>
+                <div class="small_button">
+                    <button type="button" class="button gray" onclick="getVal_percent()">%</button>
+                </div>
+                <div class="button_block"></div>
+                <div class="small_button">
+                    <button type="button" class="button gray" onclick="getVal_0()">0</button>
+                </div>
+                <div class="button_block"></div>
+                <div class="small_button">
+                    <button type="button" class="button gray" onclick="getVal_point()">.</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function ShowResult(data) {
+            var x = document.getElementById('result');
+            x.value = data['result'];
+        }
+    </script>
+    <script>
+        $('#formula_compute').click(function () {
+            $.ajax({
+                url: '/compute/', // 调用django服务器计算公式
+                type: 'POST',     // 请求类型
+                data: {
+                    'code': $('#formula').val() // 获取文本框中的公式
+                },
+                dataType: 'json',   // 期望获得的响应类型为json
+                success: ShowResult // 在请求成功之后调用该回调函数输出结果
+            })
+        })
+    </script>
+
+
+    <canvas id="cas" style="position: absolute; z-index: -1; top: 0px; left: 0px"></canvas>
+
+    <script>
+        var formula_text = document.getElementById('formula');
+        var result = document.getElementById('result');
+        var memory_digit = document.getElementById('mr');
+
+        function getVal_mclear() {
+            memory_digit.value = '';
+        }
+
+        function getVal_mplus() {
+            memory_digit.value = result.value;
+        }
+
+        function getVal_mminus() {
+            memory_digit.value = '-' + result.value;
+        }
+
+        function getVal_mrecall() {
+            formula_text.value += memory_digit.value;
+        }
+
+        function getVal_0() {
+            formula_text.value += '0';
+        }
+
+        function getVal_1() {
+            formula_text.value += '1';
+        }
+
+        function getVal_2() {
+            formula_text.value += '2';
+        }
+
+        function getVal_3() {
+            formula_text.value += '3';
+        }
+
+        function getVal_4() {
+            formula_text.value += '4';
+        }
+
+        function getVal_5() {
+            formula_text.value += '5';
+        }
+
+        function getVal_6() {
+            formula_text.value += '6';
+        }
+
+        function getVal_7() {
+            formula_text.value += '7';
+        }
+
+        function getVal_8() {
+            formula_text.value += '8';
+        }
+
+        function getVal_9() {
+            formula_text.value += '9';
+        }
+
+        function getVal_plus() {
+            var formula_length = formula_text.value.length;
+            var last_char = formula_text.value.charAt(formula_length - 1);
+
+            if (!isNaN(parseInt(last_char))) {
+                formula_text.value += '+';
+            }
+            else if (last_char == '+' || last_char == '-' || last_char == '÷' || last_char == '×') {
+                formula_text.value = formula_text.value.slice(0, formula_length - 1);
+                formula_text.value += '+';
+            }
+        }
+
+        function getVal_minus() {
+            var formula_length = formula_text.value.length;
+            var last_char = formula_text.value.charAt(formula_length - 1);
+
+            if (last_char == '+' || last_char == '-' || last_char == '÷' || last_char == '×') {
+                formula_text.value = formula_text.value.slice(0, formula_length - 1);
+            }
+            formula_text.value += '-';
+        }
+
+        function getVal_multiply() {
+            var formula_length = formula_text.value.length;
+            var last_char = formula_text.value.charAt(formula_length - 1);
+
+            if (!isNaN(parseInt(last_char))) {
+                formula_text.value += '×';
+            }
+            else if (last_char == '+' || last_char == '-' || last_char == '÷' || last_char == '×') {
+                formula_text.value = formula_text.value.slice(0, formula_length - 1);
+                formula_text.value += '×';
+            }
+        }
+
+
+        function getVal_divide() {
+            var formula_length = formula_text.value.length;
+            var last_char = formula_text.value.charAt(formula_length - 1);
+
+            if (!isNaN(parseInt(last_char))) {
+                formula_text.value += '÷';
+            }
+            else if (last_char == '+' || last_char == '-' || last_char == '÷' || last_char == '×') {
+                formula_text.value = formula_text.value.slice(0, formula_length - 1);
+                formula_text.value += '÷';
+            }
+        }
+
+        function getVal_percent() {
+            var formula_length = formula_text.value.length;
+            var last_char = formula_text.value.charAt(formula_length - 1);
+            if (!isNaN(parseInt(last_char))) {
+                formula_text.value += '/100';
+            }
+        }
+
+        function getVal_point() {
+            formula_text.value += '.';
+        }
+
+        function getVal_delete() {
+            formula_text.value = formula_text.value.slice(0, formula_text.value.length - 1);
+        }
+
+        function getVal_clear() {
+            formula_text.value = '';
+            result.value = '';
+        }
+
+        var canvas = document.getElementById("cas");
+        var ctx = canvas.getContext("2d");
+        resize();
+        window.onresize = resize;
+
+        function resize() {
+            canvas.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+            canvas.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        }
+
+        var RAF = (function () {
+            return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
+                window.setTimeout(callback, 1000 / 60);
+            };
+        })();
+        // 鼠标活动时，获取鼠标坐标
+        var warea = {x: null, y: null, max: 20000};
+        window.onmousemove = function (e) {
+            e = e || window.event;
+            warea.x = e.clientX;
+            warea.y = e.clientY;
+        };
+        window.onmouseout = function (e) {
+            warea.x = null;
+            warea.y = null;
+        };
+        // 添加粒子
+        // x，y为粒子坐标，xa, ya为粒子xy轴加速度，max为连线的最大距离
+        var dots = [];
+        for (var i = 0; i < 300; i++) {
+            var x = Math.random() * canvas.width;
+            var y = Math.random() * canvas.height;
+            var xa = Math.random() * 2 - 1;
+            var ya = Math.random() * 2 - 1;
+            dots.push({
+                x: x,
+                y: y,
+                xa: xa,
+                ya: ya,
+                max: 6000
+            })
+        }
+        // 延迟100秒开始执行动画，如果立即执行有时位置计算会出错
+        setTimeout(function () {
+            animate();
+        }, 100);
+
+        // 每一帧循环的逻辑
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            // 将鼠标坐标添加进去，产生一个用于比对距离的点数组
+            var ndots = [warea].concat(dots);
+            dots.forEach(function (dot) {
+                // 粒子位移
+                dot.x += dot.xa;
+                dot.y += dot.ya;
+                // 遇到边界将加速度反向
+                dot.xa *= (dot.x > canvas.width || dot.x < 0) ? -1 : 1;
+                dot.ya *= (dot.y > canvas.height || dot.y < 0) ? -1 : 1;
+                // 绘制点
+                ctx.fillRect(dot.x - 0.5, dot.y - 0.5, 1, 1);
+                // 循环比对粒子间的距离
+                for (var i = 0; i < ndots.length; i++) {
+                    var d2 = ndots[i];
+                    if (dot === d2 || d2.x === null || d2.y === null) continue;
+                    var xc = dot.x - d2.x;
+                    var yc = dot.y - d2.y;
+                    // 两个粒子之间的距离
+                    var dis = xc * xc + yc * yc;
+                    // 距离比
+                    var ratio;
+                    // 如果两个粒子之间的距离小于粒子对象的max值，则在两个粒子间画线
+                    if (dis < d2.max) {
+                        // 如果是鼠标，则让粒子向鼠标的位置移动
+                        if (d2 === warea && dis > (d2.max / 2)) {
+                            dot.x -= xc * 0.03;
+                            dot.y -= yc * 0.03;
+                        }
+                        // 计算距离比
+                        ratio = (d2.max - dis) / d2.max;
+                        // 画线
+                        ctx.beginPath();
+                        ctx.lineWidth = ratio / 2;
+                        ctx.strokeStyle = 'rgba(0,0,0,' + (ratio + 0.2) + ')';
+                        ctx.moveTo(dot.x, dot.y);
+                        ctx.lineTo(d2.x, d2.y);
+                        ctx.stroke();
+                    }
+                }
+                // 将已经计算过的粒子从数组中删除
+                ndots.splice(ndots.indexOf(dot), 1);
+            });
+            RAF(animate);
+        }
+    </script>
+    <div class="footer">
+        <h2>
+        <a href="https://github.com/QueenDekimZ" title="进入作者Github主页">QueenDkimZ</a> |
+        <a href="https://www.djangoproject.com/" title="进入Django官网" target="_blank">基于Django构建</a>
+        </h2>
+        <h3>小组成员：赵启玮、霍腾霄、张之函、王建路</h3>
+    </div>
+
+</body>
+
+
+</html>
+
