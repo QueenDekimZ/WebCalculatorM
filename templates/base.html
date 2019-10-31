@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" name="viewport" content="initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no">
+    <meta charset="UTF-8" name="viewport" content="initial-scale=1,  minimum-scale=1, user-scalable=no">
     <title>网页计算器</title>
     <link rel="stylesheet" href=" {% static 'css/bootstrap.min.css' %}"/>
     <link rel="stylesheet" href=" {% static 'css/style.css' %}"/>
@@ -13,7 +13,7 @@
 <body>
 
 <div class="container-fluid">
-    <div class="row" style="margin-left: 5%">
+    <div class="row" >
         <div class="col-xs-1 col-sm-4"></div>
         <div id="computer" class="col-xs-10 col-sm-6">
 
@@ -138,6 +138,7 @@
                     <button type="button" class="button gray" onclick="getVal_point()">.</button>
                 </div>
             </div>
+            <div class="col-xs-1 col-sm-4"></div>
         </div>
     </div>
 
@@ -392,15 +393,8 @@
         }
     </script>
     <div class="footer">
-        <h4>
+        <h5 style="font-family: 'Lucida Console' ">
         <a href="https://github.com/QueenDekimZ" title="进入作者Github主页">QueenDkimZ</a> |
         <a href="https://www.djangoproject.com/" title="进入Django官网" target="_blank">基于Django构建</a>
-        </h4>
-        <h5>小组成员：<br/>赵启玮、霍腾霄、张之函、王建路</h5>
-    </div>
-
-</body>
-
-
-</html>
-
+        </h5>
+        <h6 style="font-family: 'monospace' ">小组成员：<br/>赵启玮、霍腾霄、张之函、王建路</h6>
