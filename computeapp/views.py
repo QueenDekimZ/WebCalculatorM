@@ -28,4 +28,9 @@ def compute(request):
     code = request.POST.get('code')
     code = code.replace('÷', '/').replace('×', '*')
     result = run_code(code)
+    try:
+        if eval(result) % 1 == 0.0:
+            result = result.split('.')[0]
+    except:
+        result = result
     return JsonResponse(data={'result': result})
