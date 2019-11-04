@@ -211,7 +211,7 @@
         function getVal_mrecall() {
             var formula_length = formula_text.value.length;
             var last_char = formula_text.value.charAt(formula_length - 1);
-            if (last_char == '+' || last_char == '-' || last_char == '÷' || last_char == '×')
+            if (last_char == '+' || last_char == '-' || last_char == '÷' || last_char == '×' || formula_text.value == '')
                 formula_text.value += memory_digit.value;
         }
 
