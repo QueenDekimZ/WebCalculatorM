@@ -27,7 +27,7 @@
             <div class="demo_con">
 
                 <div class="small_button">
-                    <button type="button" class="button gray" id="mc" onclick="getVal_mclear()">mc</button>
+                    <button type="button" class="button gray" id="mc" onclick="getVal_mclear()" >mc</button>
                 </div>
 
                 <div class="button_block"></div>
@@ -47,23 +47,23 @@
 
                 <div class="button_block"></div>
                 <div class="small_button">
-                    <button type="button" class="button gray" onclick="getVal_clear()">C</button>
+                    <button type="button" class="button gray" onclick="getVal_clear()" style="color: dodgerblue;">C</button>
                 </div>
 
                 <div class="button_block"></div>
                 <div class="small_button">
-                    <button type="button" class="button gray" onclick="getVal_divide()">÷</button>
+                    <button type="button" class="button gray" onclick="getVal_divide()" style="color: dodgerblue;">÷</button>
                 </div>
 
                 <div class="button_block"></div>
                 <div class="small_button">
-                    <button type="button" class="button gray" onclick="getVal_multiply()">×</button>
+                    <button type="button" class="button gray" onclick="getVal_multiply()" style="color: dodgerblue;">×</button>
                 </div>
 
 
                 <div class="button_block"></div>
                 <div class="small_button">
-                    <button type="button" class="button gray" onclick="getVal_delete()">⇦</button>
+                    <button type="button" class="button gray" onclick="getVal_delete()" style="color: dodgerblue;">⇦</button>
                 </div>
 
                 <div class="button_block"></div>
@@ -83,7 +83,7 @@
 
                 <div class="button_block"></div>
                 <div class="small_button">
-                    <button type="button" class="button gray" onclick="getVal_minus()">-</button>
+                    <button type="button" class="button gray" onclick="getVal_minus()" style="color: dodgerblue;">-</button>
                 </div>
 
                 <div class="button_block"></div>
@@ -103,7 +103,7 @@
 
                 <div class="button_block"></div>
                 <div class="small_button">
-                    <button type="button" class="button gray" onclick="getVal_plus()">+</button>
+                    <button type="button" class="button gray" onclick="getVal_plus()" style="color: dodgerblue;">+</button>
                 </div>
 
                 <div class="button_block"></div>
@@ -124,7 +124,7 @@
                 </div>
                 <div class="button_block"></div>
                 <div class="big_button">
-                    <button type="button" class="button gray big" id="formula_compute">=</button>
+                    <button type="button" class="button gray big" id="formula_compute" style="color: orangered;">=</button>
                 </div>
                 <div class="button_block"></div>
                 <div class="small_button">
@@ -184,6 +184,10 @@
 
         function getVal_mclear() {
             memory_digit.value = '';
+            document.getElementById('mr').style.color = 'gray';
+            document.getElementById('mc').style.color = 'gray';
+
+
         }
 
         function getVal_mplus() {
@@ -194,7 +198,12 @@
             else {
                 memory_digit.value = '';
             }
+            if(memory_digit.value != ''){
+                document.getElementById('mr').style.color = 'orangered';
+                document.getElementById('mc').style.color = 'orangered';
 
+            }
+            /* 如果有记忆数字则mr和mc键变色 */
         }
 
         function getVal_mminus() {
@@ -204,6 +213,10 @@
 
             else {
                 memory_digit.value = '';
+            }
+            if(memory_digit.value != ''){
+                document.getElementById('mr').style.color = 'orangered';
+                document.getElementById('mc').style.color = 'orangered';
             }
 
         }
